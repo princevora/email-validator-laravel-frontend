@@ -6,7 +6,10 @@ import { useEffect, useState } from "react";
 export default function Card(props) {
     const { state } = useInputContext();
     const [errors, setErrors] = useState([]);
-    const [response, setResponse] = useState({});
+    const [response, setResponse] = useState({
+        status: 0,
+        data: {}
+    });
     const endPoint = process.env.NEXT_PUBLIC_APP_URL + 'api/validate/';
 
     useEffect(() => {
@@ -19,8 +22,19 @@ export default function Card(props) {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({input: state})
-        }).then(rsp => setResponse(rsp))
-          .catch(err => setErrors());        
+        }).then(rsp => setResponse({
+            status: 1,
+            data: rsp
+        }))
+          .catch((err) => {
+            if(err?.message) {
+                setErrors((prev) => [
+                    err.message
+                ])
+            } else {
+                setErrors("Unable to complete the request please check your input");
+            }
+          });
 
     }, []);
 
