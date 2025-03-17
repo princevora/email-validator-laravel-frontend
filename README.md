@@ -21,6 +21,8 @@ generate a environment key with the command `php artisan key:generate`
 
 and start your server with the command `php artisan serve`
 
+![Demo](image.png)
+
 ## Environment setup
 copy the `.env.example` file into your environment's file i.g `.env.local`
 and set the `NEXT_PUBLIC_APP_URL` to your backend url
