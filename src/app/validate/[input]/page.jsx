@@ -15,9 +15,7 @@ export default function Validate(props) {
 
   return (
     state && (
-      <Card>
-        <h1>fafjashjk</h1>
-      </Card>
+      <Card />
     )
   )
 }

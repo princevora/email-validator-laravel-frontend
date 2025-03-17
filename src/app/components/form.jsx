@@ -1,4 +1,23 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 export default function Form() {
+    const [state, setState] = useState("");
+    const router = useRouter();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // redirect to the validate path.
+        router.push("/validate/" + state);
+    }
+
+    const handleChange = (e) => {
+        setState(e.target.value);
+    }
+
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30 w-[700px]">
@@ -7,7 +26,7 @@ export default function Form() {
                         Enter your Email to start
                     </h1>
                     <div className="p-4">
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <label
                                 htmlFor="search"
                                 className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -33,7 +52,7 @@ export default function Form() {
                                 </div>
                                 <input
                                     type="search"
-                                    id="search"
+                                    onChange={handleChange}
                                     className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Enter Email, Domain Or Website URL"
                                     required=""
